@@ -15,6 +15,9 @@ const server = http.createServer(function (req, res) {
     const path = parsedUrl.pathname
     const trimmedPath = path.replace(/^\/+|\/+$/g, '')
 
+    // Get the HTTP method
+    const method = req.method.toLowerCase()
+
     // Send the response
     res.end('Hello World\n')
 
