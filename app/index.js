@@ -12,6 +12,11 @@ const fs = require('fs')
 const handlers = require('./lib/handlers')
 const helpers = require('./lib/helpers')
 
+// TODO: get rid of this
+helpers.sendTwilioSms('67996767913', 'Hello!', function (err) {
+    console.log('this was the error', err)
+})
+
 // Instantiate the HTTP server
 const httpServer = http.createServer(function (req, res) {
     unifiedServer(req, res)
