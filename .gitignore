@@ -2,3 +2,5 @@
 .idea/
 
 app/.data/
+
+app/.logs/
