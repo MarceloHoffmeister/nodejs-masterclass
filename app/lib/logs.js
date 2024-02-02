@@ -5,7 +5,7 @@
 // Dependencies
 const fs = require('fs')
 const path = require('path')
-const zlib = require("zlib");
+const zlib = require('zlib');
 
 // Container for the module
 const lib = {}
