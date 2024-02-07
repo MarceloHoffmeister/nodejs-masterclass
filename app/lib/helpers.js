@@ -6,7 +6,9 @@
 const crypto = require('crypto')
 const config = require('./config')
 const https = require('https')
-const querystring = require('querystring');
+const querystring = require('querystring')
+const path = require('path')
+const fs = require('fs')
 
 // Container for the helpers
 const helpers = {}
@@ -98,7 +100,7 @@ helpers.sendTwilioSms = function (phone, msg, callback) {
             }
         })
 
-        // Bind to the error event so it doesn't get thrown
+        // Bind to the error event, so it doesn't get thrown
         req.on('error', function (e) {
             callback(e)
         })
@@ -110,6 +112,25 @@ helpers.sendTwilioSms = function (phone, msg, callback) {
         req.end()
     } else {
         callback('Given parameters were missing or invalid')
+    }
+}
+
+// Get the string content of a template
+helpers.getTemplate = function (templateName, callback) {
+    templateName = typeof (templateName) === 'string' && templateName.length > 0 ? templateName : false
+
+    if (templateName) {
+        const templatesDir = path.join(__dirname, '/../templates/')
+
+        fs.readFile(`${templatesDir}${templateName}.html`, 'utf8', function (err, str) {
+            if (!err && str) {
+                callback(false, str)
+            } else {
+                callback('No template could be found')
+            }
+        })
+    } else {
+        callback('A valid template name was not specified')
     }
 }
 
